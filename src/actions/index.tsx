@@ -37,26 +37,27 @@ revalidatePath("/");
 
 }
 
-export async function editTodo(formData: FormData){
+export async function editTodo(formData: FormData) {
     const newTitle = formData.get('newTitle') as string;
     const inputId = formData.get("inputId") as string;
-    const todo = await prisma.todo.update({
-        where: {
-            id: inputId,
-        }, 
-        data: {
-            title: newTitle,
-        },
+    await prisma.todo.update({
+      where: {
+        id: inputId,
+      },
+      data: {
+        title: newTitle,
+      },
     });
     revalidatePath("/");
-}
-
-export async function deleteTodo(formData: FormData){
+  }
+  
+  export async function deleteTodo(formData: FormData) {
     const inputId = formData.get("inputId") as string;
-    const todo = await prisma.todo.delete({
-        where:{
-            id: inputId,
-        },
+    await prisma.todo.delete({
+      where: {
+        id: inputId,
+      },
     });
-    revalidatePath("/")
-}
+    revalidatePath("/");
+  }
+  
